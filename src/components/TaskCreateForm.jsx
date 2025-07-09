@@ -64,7 +64,7 @@ export const TaskCreateForm = () => {
           setFormState('focused')
         })
     },
-    [title, detail, done],
+    [title, detail, done]
   )
 
   useEffect(() => {
@@ -88,38 +88,36 @@ export const TaskCreateForm = () => {
   return (
     <form
       ref={refForm}
-      className="task_create_form"
+      className='task_create_form'
       onSubmit={onSubmit}
       data-state={formState}
     >
-      <div className="task_create_form__title_container">
+      <div className='task_create_form__title_container'>
         <button
-          type="button"
+          type='button'
           onClick={handleToggle}
-          className="task_create_form__mark_button"
+          className='task_create_form__mark_button'
           onFocus={handleFocus}
           onBlur={handleBlur}
         >
           {done ? (
             <div
-              className="task_create_form__mark____complete"
-              aria-label="Completed"
+              className='task_create_form__mark____complete'
+              aria-label='Completed'
             >
-              <CheckIcon
-                className="task_create_form__mark____complete_check"
-              />
+              <CheckIcon className='task_create_form__mark____complete_check' />
             </div>
           ) : (
             <div
-              className="task_create_form__mark____incomplete"
-              aria-label="Incomplete"
-            ></div>
+              className='task_create_form__mark____incomplete'
+              aria-label='Incomplete'
+            />
           )}
         </button>
         <input
-          type="text"
-          className="task_create_form__title"
-          placeholder="Add a new task..."
+          type='text'
+          className='task_create_form__title'
+          placeholder='Add a new task...'
           value={title}
           onChange={e => setTitle(e.target.value)}
           onFocus={handleFocus}
@@ -132,28 +130,28 @@ export const TaskCreateForm = () => {
           <textarea
             ref={setElemTextarea}
             rows={1}
-            className="task_create_form__detail"
-            placeholder="Add a description here..."
+            className='task_create_form__detail'
+            placeholder='Add a description here...'
             value={detail}
             onChange={e => setDetail(e.target.value)}
             onBlur={handleBlur}
             disabled={formState === 'submitting'}
           />
-          <div className="task_create_form__actions">
+          <div className='task_create_form__actions'>
             <button
-              type="button"
-              className="app_button"
-              data-variant="secondary"
+              type='button'
+              className='app_button'
+              data-variant='secondary'
               onBlur={handleBlur}
               onClick={handleDiscard}
               disabled={(!title && !detail) || formState === 'submitting'}
             >
               Discard
             </button>
-            <div className="task_create_form__spacer"></div>
+            <div className='task_create_form__spacer' />
             <button
-              type="submit"
-              className="app_button"
+              type='submit'
+              className='app_button'
               onBlur={handleBlur}
               disabled={!title || !detail || formState === 'submitting'}
             >

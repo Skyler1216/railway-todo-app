@@ -7,18 +7,15 @@ export const useLogout = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const logoutUser = useCallback(
-    async () => {
-      try {
-        await dispatch(logout()).unwrap()
-        navigate('/signin')
-      } catch (e) {
-        // エラーハンドリングは既にlogout内で行われている
-        throw e
-      }
-    },
-    [dispatch, navigate],
-  )
+  const logoutUser = useCallback(async () => {
+    try {
+      await dispatch(logout()).unwrap()
+      navigate('/signin')
+    } catch (e) {
+      // エラーハンドリングは既にlogout内で行われている
+      throw e
+    }
+  }, [dispatch, navigate])
 
   return { logout: logoutUser }
 }

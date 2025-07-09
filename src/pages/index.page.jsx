@@ -19,7 +19,7 @@ const Home = () => {
     }
   }, [currentListId, navigate])
 
-  return <div></div>
+  return <div />
 }
 
 export default Home

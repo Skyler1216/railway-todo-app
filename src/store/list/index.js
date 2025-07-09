@@ -95,7 +95,7 @@ export const fetchLists = createAsyncThunk(
     } finally {
       thunkApi.dispatch(setListIsLoading(false))
     }
-  },
+  }
 )
 
 export const createList = createAsyncThunk(
@@ -109,7 +109,7 @@ export const createList = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const deleteList = createAsyncThunk(
@@ -121,7 +121,7 @@ export const deleteList = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const updateList = createAsyncThunk(
@@ -133,5 +133,5 @@ export const updateList = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )

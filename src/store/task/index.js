@@ -90,7 +90,7 @@ export const fetchTasks = createAsyncThunk(
     } finally {
       thunkApi.dispatch(setTaskIsLoading(false))
     }
-  },
+  }
 )
 
 export const createTask = createAsyncThunk(
@@ -109,12 +109,12 @@ export const createTask = createAsyncThunk(
         addTask({
           ...payload,
           id,
-        }),
+        })
       )
     } catch (e) {
       handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const updateTask = createAsyncThunk(
@@ -142,7 +142,7 @@ export const updateTask = createAsyncThunk(
     } catch (e) {
       handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const deleteTask = createAsyncThunk(
@@ -159,5 +159,5 @@ export const deleteTask = createAsyncThunk(
     } catch (e) {
       handleThunkError(e, thunkApi)
     }
-  },
+  }
 )

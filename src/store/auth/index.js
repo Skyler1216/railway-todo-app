@@ -54,7 +54,7 @@ export const fetchUser = createAsyncThunk(
     } finally {
       thunkApi.dispatch(setUserIsLoading(false))
     }
-  },
+  }
 )
 
 export const login = createAsyncThunk(
@@ -73,7 +73,7 @@ export const login = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const signup = createAsyncThunk(
@@ -91,7 +91,7 @@ export const signup = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const logout = createAsyncThunk(
@@ -105,5 +105,5 @@ export const logout = createAsyncThunk(
     // 他のステートをリセット
     thunkApi.dispatch(resetTask())
     thunkApi.dispatch(resetList())
-  },
+  }
 )

@@ -22,7 +22,7 @@ const EditTask = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const task = useSelector(state =>
-    state.task.tasks?.find(task => task.id === taskId),
+    state.task.tasks?.find(task => task.id === taskId)
   )
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const EditTask = () => {
           setIsSubmitting(false)
         })
     },
-    [title, taskId, listId, detail, done],
+    [title, taskId, listId, detail, done]
   )
 
   const handleDelete = useCallback(() => {
@@ -80,62 +80,62 @@ const EditTask = () => {
   }, [taskId])
 
   return (
-    <main className="edit_list">
+    <main className='edit_list'>
       <BackButton />
-      <h2 className="edit_list__title">Edit List</h2>
-      <p className="edit_list__error">{errorMessage}</p>
-      <form className="edit_list__form" onSubmit={onSubmit}>
-        <fieldset className="edit_list__form_field">
-          <label htmlFor={`${id}-title`} className="edit_list__form_label">
+      <h2 className='edit_list__title'>Edit List</h2>
+      <p className='edit_list__error'>{errorMessage}</p>
+      <form className='edit_list__form' onSubmit={onSubmit}>
+        <fieldset className='edit_list__form_field'>
+          <label htmlFor={`${id}-title`} className='edit_list__form_label'>
             Title
           </label>
           <input
             id={`${id}-title`}
-            className="app_input"
-            placeholder="Buy some milk"
+            className='app_input'
+            placeholder='Buy some milk'
             value={title}
             onChange={event => setTitle(event.target.value)}
           />
         </fieldset>
-        <fieldset className="edit_list__form_field">
-          <label htmlFor={`${id}-detail`} className="edit_list__form_label">
+        <fieldset className='edit_list__form_field'>
+          <label htmlFor={`${id}-detail`} className='edit_list__form_label'>
             Description
           </label>
           <textarea
             id={`${id}-detail`}
-            className="app_input"
-            placeholder="Blah blah blah"
+            className='app_input'
+            placeholder='Blah blah blah'
             value={detail}
             onChange={event => setDetail(event.target.value)}
           />
         </fieldset>
-        <fieldset className="edit_list__form_field">
-          <label htmlFor={`${id}-done`} className="edit_list__form_label">
+        <fieldset className='edit_list__form_field'>
+          <label htmlFor={`${id}-done`} className='edit_list__form_label'>
             Is Done
           </label>
           <div>
             <input
               id={`${id}-done`}
-              type="checkbox"
+              type='checkbox'
               checked={done}
               onChange={event => setDone(event.target.checked)}
             />
           </div>
         </fieldset>
-        <div className="edit_list__form_actions">
-          <Link to="/" data-variant="secondary" className="app_button">
+        <div className='edit_list__form_actions'>
+          <Link to='/' data-variant='secondary' className='app_button'>
             Cancel
           </Link>
-          <div className="edit_list__form_actions_spacer"></div>
+          <div className='edit_list__form_actions_spacer' />
           <button
-            type="button"
-            className="app_button edit_list__form_actions_delete"
+            type='button'
+            className='app_button edit_list__form_actions_delete'
             disabled={isSubmitting}
             onClick={handleDelete}
           >
             Delete
           </button>
-          <button type="submit" className="app_button" disabled={isSubmitting}>
+          <button type='submit' className='app_button' disabled={isSubmitting}>
             Update
           </button>
         </div>

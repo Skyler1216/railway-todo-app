@@ -12,27 +12,30 @@ import EditList from '~/pages/lists/[listId]/edit/index.page'
 import ListIndex from '~/pages/lists/[listId]/index.page'
 
 export const Router = () => {
-  const auth = useSelector((state) => state.auth.token !== null)
+  const auth = useSelector(state => state.auth.token !== null)
 
   return (
     <BrowserRouter>
       <Sidebar />
-      <div className="main_content">
+      <div className='main_content'>
         <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path='/signin' element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
           {auth ? (
             <>
-              <Route path="/" element={<Home />} />
-              <Route path="/lists/:listId" element={<ListIndex />} />
-              <Route path="/list/new" element={<NewList />} />
-              <Route path="/lists/:listId/tasks/:taskId" element={<EditTask />} />
-              <Route path="/lists/:listId/edit" element={<EditList />} />
+              <Route path='/' element={<Home />} />
+              <Route path='/lists/:listId' element={<ListIndex />} />
+              <Route path='/list/new' element={<NewList />} />
+              <Route
+                path='/lists/:listId/tasks/:taskId'
+                element={<EditTask />}
+              />
+              <Route path='/lists/:listId/edit' element={<EditList />} />
             </>
           ) : (
-            <Route path="*" element={<Navigate to="/signin" replace />} />
+            <Route path='*' element={<Navigate to='/signin' replace />} />
           )}
-          <Route path="*" element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>

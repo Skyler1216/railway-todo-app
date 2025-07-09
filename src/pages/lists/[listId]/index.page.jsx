@@ -12,7 +12,7 @@ const ListIndex = () => {
   const { listId } = useParams()
 
   const isLoading = useSelector(
-    state => state.task.isLoading || state.list.isLoading,
+    state => state.task.isLoading || state.list.isLoading
   )
 
   const tasks = useSelector(state => state.task.tasks)
@@ -31,30 +31,30 @@ const ListIndex = () => {
   }, [listId])
 
   if (isLoading) {
-    return <div></div>
+    return <div />
   }
 
   return (
-    <div className="tasks_list">
-      <div className="tasks_list__title">
+    <div className='tasks_list'>
+      <div className='tasks_list__title'>
         {listName}
         {incompleteTasksCount > 0 && (
-          <span className="tasks_list__title__count">
+          <span className='tasks_list__title__count'>
             {incompleteTasksCount}
           </span>
         )}
-        <div className="tasks_list__title_spacer"></div>
+        <div className='tasks_list__title_spacer' />
         <Link to={`/lists/${listId}/edit`}>
-          <button className="app_button">Edit...</button>
+          <button className='app_button'>Edit...</button>
         </Link>
       </div>
-      <div className="tasks_list__items">
+      <div className='tasks_list__items'>
         <TaskCreateForm />
         {tasks?.map(task => {
           return <TaskItem key={task.id} task={task} />
         })}
         {tasks?.length === 0 && (
-          <div className="tasks_list__items__empty">No tasks yet!</div>
+          <div className='tasks_list__items__empty'>No tasks yet!</div>
         )}
       </div>
     </div>

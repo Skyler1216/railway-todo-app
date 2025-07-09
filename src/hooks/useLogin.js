@@ -8,7 +8,7 @@ export const useLogin = () => {
   const navigate = useNavigate()
 
   const loginUser = useCallback(
-    async (payload) => {
+    async payload => {
       try {
         await dispatch(login(payload)).unwrap()
         navigate('/')
@@ -17,7 +17,7 @@ export const useLogin = () => {
         throw e
       }
     },
-    [dispatch, navigate],
+    [dispatch, navigate]
   )
 
   return { login: loginUser }

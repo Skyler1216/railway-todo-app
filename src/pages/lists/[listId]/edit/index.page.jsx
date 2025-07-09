@@ -19,7 +19,7 @@ const EditList = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const list = useSelector(state =>
-    state.list.lists?.find(list => list.id === listId),
+    state.list.lists?.find(list => list.id === listId)
   )
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const EditList = () => {
           setIsSubmitting(false)
         })
     },
-    [title, listId],
+    [title, listId]
   )
 
   const handleDelete = useCallback(() => {
@@ -74,37 +74,37 @@ const EditList = () => {
   }, [])
 
   return (
-    <main className="edit_list">
+    <main className='edit_list'>
       <BackButton />
-      <h2 className="edit_list__title">Edit List</h2>
-      <p className="edit_list__error">{errorMessage}</p>
-      <form className="edit_list__form" onSubmit={onSubmit}>
-        <fieldset className="edit_list__form_field">
-          <label htmlFor={`${id}-title`} className="edit_list__form_label">
+      <h2 className='edit_list__title'>Edit List</h2>
+      <p className='edit_list__error'>{errorMessage}</p>
+      <form className='edit_list__form' onSubmit={onSubmit}>
+        <fieldset className='edit_list__form_field'>
+          <label htmlFor={`${id}-title`} className='edit_list__form_label'>
             Name
           </label>
           <input
             id={`${id}-title`}
-            className="app_input"
-            placeholder="Family"
+            className='app_input'
+            placeholder='Family'
             value={title}
             onChange={event => setTitle(event.target.value)}
           />
         </fieldset>
-        <div className="edit_list__form_actions">
-          <Link to="/" data-variant="secondary" className="app_button">
+        <div className='edit_list__form_actions'>
+          <Link to='/' data-variant='secondary' className='app_button'>
             Cancel
           </Link>
-          <div className="edit_list__form_actions_spacer"></div>
+          <div className='edit_list__form_actions_spacer' />
           <button
-            type="button"
-            className="app_button edit_list__form_actions_delete"
+            type='button'
+            className='app_button edit_list__form_actions_delete'
             disabled={isSubmitting}
             onClick={handleDelete}
           >
             Delete
           </button>
-          <button type="submit" className="app_button" disabled={isSubmitting}>
+          <button type='submit' className='app_button' disabled={isSubmitting}>
             Update
           </button>
         </div>
