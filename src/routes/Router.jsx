@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Sidebar } from '~/components/Sidebar'
 import Home from '~/pages/index.page'
 import NotFound from '~/pages/404'
@@ -18,40 +18,22 @@ export const Router = () => {
     <BrowserRouter>
       <Sidebar />
       <div className="main_content">
-        <Switch>
-          <Route exact path="/signin">
-            <SignIn />
-          </Route>
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           {auth ? (
             <>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/lists/:listId">
-                <ListIndex />
-              </Route>
-              <Route exact path="/list/new">
-                <NewList />
-              </Route>
-              <Route exact path="/lists/:listId/tasks/:taskId">
-                <EditTask />
-              </Route>
-              <Route exact path="/lists/:listId/edit">
-                <EditList />
-              </Route>
+              <Route path="/" element={<Home />} />
+              <Route path="/lists/:listId" element={<ListIndex />} />
+              <Route path="/list/new" element={<NewList />} />
+              <Route path="/lists/:listId/tasks/:taskId" element={<EditTask />} />
+              <Route path="/lists/:listId/edit" element={<EditList />} />
             </>
           ) : (
-            <Route path="/">
-              <Redirect to="/signin" />
-            </Route>
+            <Route path="*" element={<Navigate to="/signin" replace />} />
           )}
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </BrowserRouter>
   )

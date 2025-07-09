@@ -1,27 +1,24 @@
-import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { signup } from '~/store/auth'
 
 export const useSignup = () => {
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
 
-  const handleSignup = useCallback(
-    async ({ email, password, name }) => {
-      await dispatch(
-        signup({
-          email,
-          password,
-          name,
-        }),
-      ).unwrap()
-      history.push('/')
+  const signupUser = useCallback(
+    async (payload) => {
+      try {
+        await dispatch(signup(payload)).unwrap()
+        navigate('/')
+      } catch (e) {
+        // エラーハンドリングは既にsignup内で行われている
+        throw e
+      }
     },
-    [useDispatch],
+    [dispatch, navigate],
   )
 
-  return {
-    signup: handleSignup,
-  }
+  return { signup: signupUser }
 }

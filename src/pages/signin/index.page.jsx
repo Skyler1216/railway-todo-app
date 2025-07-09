@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Redirect, Link } from 'react-router-dom'
+import { Navigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useLogin } from '~/hooks/useLogin'
 import { useId } from '~/hooks/useId'
@@ -34,7 +34,7 @@ const SignIn = () => {
   )
 
   if (auth) {
-    return <Redirect to="/" />
+    return <Navigate to="/" replace />
   }
 
   return (
