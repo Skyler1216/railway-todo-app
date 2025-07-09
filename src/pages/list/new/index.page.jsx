@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { BackButton } from '~/components/BackButton'
 import './index.css'
 import { createList, setCurrentList } from '~/store/list/index'
@@ -10,8 +10,6 @@ const NewList = () => {
   const id = useId()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const isLoading = useSelector(state => state.list.isLoading)
 
   const [title, setTitle] = useState('')
 
@@ -37,7 +35,7 @@ const NewList = () => {
           setIsSubmitting(false)
         })
     },
-    [title]
+    [title, dispatch, navigate]
   )
 
   return (

@@ -64,7 +64,7 @@ export const TaskCreateForm = () => {
           setFormState('focused')
         })
     },
-    [title, detail, done]
+    [title, detail, done, dispatch, handleDiscard]
   )
 
   useEffect(() => {

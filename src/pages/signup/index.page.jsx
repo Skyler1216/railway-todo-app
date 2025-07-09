@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './index.css'
@@ -32,7 +32,7 @@ const SignUp = () => {
           setIsSubmitting(false)
         })
     },
-    [email, name, password]
+    [email, name, password, signup]
   )
 
   if (auth) {

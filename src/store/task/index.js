@@ -12,7 +12,7 @@ export const taskSlice = createSlice({
   name: 'task',
   initialState,
   reducers: {
-    resetTask: (state, _action) => {
+    resetTask: state => {
       state.tasks = null
       state.listId = null
       state.isLoading = false

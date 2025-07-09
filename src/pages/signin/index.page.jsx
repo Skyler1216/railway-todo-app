@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useLogin } from '~/hooks/useLogin'
@@ -30,7 +30,7 @@ const SignIn = () => {
           setIsSubmitting(false)
         })
     },
-    [email, password]
+    [email, password, login]
   )
 
   if (auth) {

@@ -12,7 +12,7 @@ export const listSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
-    resetList: (state, _action) => {
+    resetList: state => {
       state.lists = null
       state.current = null
       state.isLoading = false

@@ -9,13 +9,8 @@ export const useSignup = () => {
 
   const signupUser = useCallback(
     async payload => {
-      try {
-        await dispatch(signup(payload)).unwrap()
-        navigate('/')
-      } catch (e) {
-        // エラーハンドリングは既にsignup内で行われている
-        throw e
-      }
+      await dispatch(signup(payload)).unwrap()
+      navigate('/')
     },
     [dispatch, navigate]
   )
