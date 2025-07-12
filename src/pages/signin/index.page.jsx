@@ -1,8 +1,9 @@
 import { useCallback, useState } from 'react'
-import { Navigate, Link } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useLogin } from '~/hooks/useLogin'
 import { useId } from '~/hooks/useId'
+import { Button } from '~/components/ui/Button'
 import './index.css'
 
 const SignIn = () => {
@@ -69,13 +70,13 @@ const SignIn = () => {
           />
         </fieldset>
         <div className='signin__form_actions'>
-          <Link className='app_button' data-variant='secondary' to='/signup'>
+          <Button variant='secondary' to='/signup'>
             Register
-          </Link>
+          </Button>
           <div className='signin__form_actions_spacer' />
-          <button type='submit' className='app_button' disabled={isSubmitting}>
+          <Button type='submit' disabled={isSubmitting}>
             Login
-          </button>
+          </Button>
         </div>
       </form>
     </main>

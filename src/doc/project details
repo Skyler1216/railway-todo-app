@@ -1,0 +1,116 @@
+# Railway Todo App - プロジェクト詳細
+
+## 📋 プロジェクト概要
+- **プロジェクト名**: railway-todo-app
+- **バージョン**: 0.1.0
+- **技術スタック**: React 19 + Redux Toolkit + Vite
+- **パッケージマネージャー**: Yarn
+
+## 🏗️ アーキテクチャ構成
+
+### ルートディレクトリ
+- `package.json` - プロジェクト設定、依存関係、スクリプト
+- `vite.config.js` - Viteビルド設定
+- `eslint.config.js` - ESLintコード品質チェック
+- `jsconfig.json` - JavaScript設定
+- `.prettierrc` - Prettierコードフォーマット
+- `index.html` - アプリケーションエントリーポイント
+
+### src/ ディレクトリ構造
+
+#### エントリーポイント
+- `index.jsx` - Reactアプリケーションエントリーポイント
+- `App.jsx` - メインアプリケーションコンポーネント
+- `index.css` - グローバルスタイル
+
+#### components/ - UIコンポーネント
+- `TaskItem.jsx/.css` - 個別タスク表示
+- `TaskCreateForm.jsx/.css` - タスク作成フォーム
+- `Sidebar.jsx/.css` - サイドバーナビゲーション
+- `BackButton.jsx/.css` - 戻るボタン
+- `ui/` - 汎用UIコンポーネント
+
+#### pages/ - ページコンポーネント
+- `index.page.jsx` - ホームページ
+- `404.jsx` - 404エラーページ
+- `signin/` - サインインページ
+- `signup/` - サインアップページ
+- `lists/` - リスト一覧・詳細
+- `list/` - 個別リストページ
+
+#### store/ - Redux状態管理
+- `index.js` - Reduxストア設定
+- `auth/` - 認証状態管理
+- `list/` - リスト状態管理
+- `task/` - タスク状態管理
+
+#### hooks/ - カスタムReactフック
+- `useId.js` - ID生成
+- `useLogin.js` - ログイン処理
+- `useLogout.js` - ログアウト処理
+- `useSignup.js` - サインアップ処理
+
+#### routes/ - ルーティング
+- `Router.jsx` - React Router設定
+
+#### icons/ - アイコンコンポーネント
+- `CheckIcon.jsx` - チェックアイコン
+- `ChevronIcon.jsx` - 矢印アイコン
+- `ListIcon.jsx` - リストアイコン
+- `PencilIcon.jsx` - 編集アイコン
+- `PlusIcon.jsx` - 追加アイコン
+
+#### utils/ - ユーティリティ
+- `handleThunkError.js` - Redux Thunkエラーハンドリング
+
+#### vendor/ - 外部ライブラリ
+- `axios.js` - HTTPクライアント設定
+
+## 🛠️ 開発環境
+
+### 主要依存関係
+- **React**: 19.1.0
+- **Redux Toolkit**: 2.7.0
+- **React Router DOM**: 7.6.3
+- **Axios**: 1.8.3
+- **Vite**: 6.3.2
+
+### 開発ツール
+- **ESLint**: コード品質チェック
+- **Prettier**: コードフォーマット
+- **SWC**: 高速コンパイル
+
+### スクリプト
+- `yarn start` / `yarn dev` - 開発サーバー起動
+- `yarn build` - プロダクションビルド
+- `yarn lint` - コード品質チェック
+- `yarn lint:fix` - 自動修正
+- `yarn format` - コードフォーマット
+
+## 🎯 機能概要
+- ユーザー認証（サインアップ/サインイン）
+- リスト管理
+- タスク作成・編集・削除
+- レスポンシブデザイン
+- SPA（Single Page Application）
+
+## 📝 設計原則
+1. **コンポーネントベース設計** - 再利用可能なUIコンポーネント
+2. **集中状態管理** - Redux Toolkitによる状態管理
+3. **モジュラー構造** - 機能別ディレクトリ分割
+4. **コード品質** - ESLint + Prettierによる統一
+5. **開発体験** - Viteによる高速開発環境
+
+## 🔧 開発フロー
+1. コンポーネント作成 → components/
+2. ページ作成 → pages/
+3. 状態管理 → store/
+4. カスタムフック → hooks/
+5. ルーティング設定 → routes/
+
+## 📚 参考情報
+- プロジェクト作成日: 2024年
+- フレームワーク: React 19
+- ビルドツール: Vite
+- 状態管理: Redux Toolkit
+- ルーティング: React Router DOM

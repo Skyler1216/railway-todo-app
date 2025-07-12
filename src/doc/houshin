@@ -1,0 +1,36 @@
+修正方針
+1. 共通化できるコンポーネントの洗い出し
+ボタンコンポーネント:
+app_button クラスを使用している箇所が多数存在
+通常のボタンとリンクボタンの両方に対応が必要
+data-variant='secondary' でスタイル変更
+disabled 状態の管理
+
+テキストフィールドコンポーネント:
+app_input クラスを使用している箇所が多数存在
+input と textarea の両方に対応が必要
+各種 type 属性（email, password, text）に対応
+autoComplete 属性の対応
+
+2. コンポーネント設計
+Button コンポーネント:
+- プロパティ: variant (primary/secondary/danger), disabled, type, to (React Router Link用)
+- 実装済み: src/components/ui/Button.jsx, src/components/ui/Button.css
+- 対応済みページ: signin/index.page.jsx
+
+Input コンポーネント:
+- プロパティ: type (text/email/password/textarea), value, onChange, placeholder, autoComplete, disabled, rows (textarea用)
+- 未実装
+
+3. 実装手順
+共通コンポーネントディレクトリの作成 ✅
+Button コンポーネントの作成 ✅
+Button コンポーネントのCSS分離 ✅
+signinページでのButtonコンポーネント使用 ✅
+
+次のステップ:
+1. 他のページでButtonコンポーネントを使用するように修正
+2. Inputコンポーネントの作成
+3. InputコンポーネントのCSS分離
+4. 各ページでInputコンポーネントを使用するように修正
+5. 既存のapp_button, app_inputクラスの削除
