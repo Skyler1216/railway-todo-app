@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom' // リダイレクト用コンポー
 import { useSelector } from 'react-redux' // Reduxの状態取得フック
 import { useLogin } from '~/hooks/useLogin' // カスタムログインフック
 import { useId } from '~/hooks/useId' // ユニークID生成フック
-import { Button } from '~/components/ui/Button' // UIボタンコンポーネント
+import Button from '~/components/ui/Button' // UIボタンコンポーネント
 import './index.css' // このページ専用のスタイル
 
 const SignIn = () => {

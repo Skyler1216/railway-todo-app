@@ -87,6 +87,7 @@ const SignUp = () => {
             className='app_input'
             value={password}
             onChange={event => setPassword(event.target.value)}
+            autoComplete='new-password'
           />
         </fieldset>
         <div className='signup__form_actions'>
