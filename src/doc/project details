@@ -114,3 +114,40 @@
 - ビルドツール: Vite
 - 状態管理: Redux Toolkit
 - ルーティング: React Router DOM
+
+
+
+
+
+
+
+
+
+
+このアプリは◯◯構成です。
+以下の機能が実装されています。
+- ユーザー認証（サインアップ/サインイン）
+- リスト管理
+- タスク作成・編集・削除
+- レスポンシブデザイン
+- SPA（Single Page Application）
+
+アーキテクチャ構成は以下のようになっています。
+1. コンポーネント作成 → components/
+2. ページ作成 → pages/
+3. 状態管理 → store/
+4. カスタムフック → hooks/
+5. ルーティング設定 → routes/
+
+開発環境は以下の通りです。
+- 主要依存関係: React 19 + Redux Toolkit + Vite + React Router DOM + Axios
+- 開発ツール: ESLint + Prettier + SWC
+- スクリプト: yarn start / yarn dev / yarn build / yarn lint / yarn lint:fix / yarn format
+
+
+
+
+
+
+
+
