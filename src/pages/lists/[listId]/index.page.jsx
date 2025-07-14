@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { TaskItem } from '~/components/TaskItem'
 import { TaskCreateForm } from '~/components/TaskCreateForm'
+import Button from '~/components/ui/Button'
 import { setCurrentList } from '~/store/list'
 import { fetchTasks } from '~/store/task'
 import './index.css'
@@ -44,9 +45,7 @@ const ListIndex = () => {
           </span>
         )}
         <div className='tasks_list__title_spacer' />
-        <Link to={`/lists/${listId}/edit`}>
-          <button className='app_button'>Edit...</button>
-        </Link>
+        <Button to={`/lists/${listId}/edit`}>Edit...</Button>
       </div>
       <div className='tasks_list__items'>
         <TaskCreateForm />

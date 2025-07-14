@@ -5,6 +5,7 @@ import { BackButton } from '~/components/BackButton'
 import './index.css'
 import { createList, setCurrentList } from '~/store/list/index'
 import { useId } from '~/hooks/useId'
+import Button from '~/components/ui/Button'
 
 const NewList = () => {
   const id = useId()
@@ -57,13 +58,13 @@ const NewList = () => {
           />
         </fieldset>
         <div className='new_list__form_actions'>
-          <Link to='/' data-variant='secondary' className='app_button'>
+          <Button variant='secondary' to='/'>
             Cancel
-          </Link>
+          </Button>
           <div className='new_list__form_actions_spacer' />
-          <button type='submit' className='app_button' disabled={isSubmitting}>
+          <Button type='submit' disabled={isSubmitting}>
             Create
-          </button>
+          </Button>
         </div>
       </form>
     </main>
