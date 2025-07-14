@@ -1,11 +1,12 @@
 import { useCallback, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { BackButton } from '~/components/BackButton'
 import './index.css'
 import { createList, setCurrentList } from '~/store/list/index'
 import { useId } from '~/hooks/useId'
 import Button from '~/components/ui/Button'
+import Input from '~/components/ui/Input'
 
 const NewList = () => {
   const id = useId()
@@ -49,9 +50,8 @@ const NewList = () => {
           <label htmlFor={`${id}-title`} className='new_list__form_label'>
             Name
           </label>
-          <input
+          <Input
             id={`${id}-title`}
-            className='app_input'
             placeholder='Family'
             value={title}
             onChange={event => setTitle(event.target.value)}

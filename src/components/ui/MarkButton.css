@@ -1,0 +1,53 @@
+.ui-mark-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--slate-300);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ui-mark-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
+}
+
+.ui-mark-button:not(:disabled):hover {
+  border-color: var(--indigo-600);
+}
+
+.ui-mark-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Complete state */
+.ui-mark-button--complete {
+  background-color: var(--indigo-600);
+  border-color: var(--indigo-600);
+}
+
+.ui-mark-button--complete .ui-mark-button__complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-mark-button--complete .ui-mark-button__complete-check {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: white;
+}
+
+/* Incomplete state */
+.ui-mark-button--incomplete {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--slate-300);
+  border-radius: 50%;
+  background: transparent;
+} 

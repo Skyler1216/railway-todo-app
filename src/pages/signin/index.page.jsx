@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux' // Reduxの状態取得フック
 import { useLogin } from '~/hooks/useLogin' // カスタムログインフック
 import { useId } from '~/hooks/useId' // ユニークID生成フック
 import Button from '~/components/ui/Button' // UIボタンコンポーネント
+import Input from '~/components/ui/Input' // UI入力コンポーネント
 import './index.css' // このページ専用のスタイル
 
 const SignIn = () => {
@@ -54,11 +55,10 @@ const SignIn = () => {
           <label htmlFor={`${id}-email`} className='signin__form_label'>
             E-mail Address {/* ラベルテキスト */}
           </label>
-          <input
+          <Input
             id={`${id}-email`} // ラベルと紐づけるID
             type='email' // メールアドレス入力タイプ
             autoComplete='email' // ブラウザの自動補完
-            className='app_input' // 共通の入力スタイル
             value={email} // 現在のメールアドレス値
             onChange={event => setEmail(event.target.value)} // 入力値の変更を状態に反映
           />
@@ -68,11 +68,10 @@ const SignIn = () => {
           <label htmlFor={`${id}-password`} className='signin__form_label'>
             Password {/* ラベルテキスト */}
           </label>
-          <input
+          <Input
             id={`${id}-password`} // ラベルと紐づけるID
             type='password' // パスワード入力タイプ（文字が隠れる）
             autoComplete='current-password' // ブラウザの自動補完
-            className='app_input' // 共通の入力スタイル
             value={password} // 現在のパスワード値
             onChange={event => setPassword(event.target.value)} // 入力値の変更を状態に反映
           />

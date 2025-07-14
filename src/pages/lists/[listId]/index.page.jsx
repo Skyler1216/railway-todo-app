@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { TaskItem } from '~/components/TaskItem'
 import { TaskCreateForm } from '~/components/TaskCreateForm'
 import Button from '~/components/ui/Button'

@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react'
-import { Navigate, Link } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './index.css'
 import { useSignup } from '~/hooks/useSignup'
 import { useId } from '~/hooks/useId'
 import Button from '~/components/ui/Button'
+import Input from '~/components/ui/Input'
 
 const SignUp = () => {
   const auth = useSelector(state => state.auth.token !== null)
@@ -49,10 +50,9 @@ const SignUp = () => {
           <label htmlFor={`${id}-email`} className='signup__form_label'>
             E-mail Address
           </label>
-          <input
+          <Input
             id={`${id}-email`}
             autoComplete='email'
-            className='app_input'
             value={email}
             onChange={event => setEmail(event.target.value)}
           />
@@ -65,10 +65,9 @@ const SignUp = () => {
           >
             Name
           </label>
-          <input
+          <Input
             id={`${id}-name`}
             type='text'
-            className='app_input'
             value={name}
             onChange={event => setName(event.target.value)}
           />
@@ -81,10 +80,9 @@ const SignUp = () => {
           >
             Password
           </label>
-          <input
+          <Input
             id={`${id}-password`}
             type='password'
-            className='app_input'
             value={password}
             onChange={event => setPassword(event.target.value)}
             autoComplete='new-password'

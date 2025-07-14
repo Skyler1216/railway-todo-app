@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { PencilIcon } from '~/icons/PencilIcon'
-import { CheckIcon } from '~/icons/CheckIcon'
+import MarkButton from '~/components/ui/MarkButton'
 import { updateTask } from '~/store/task'
 import './TaskItem.css'
 
@@ -24,23 +24,12 @@ export const TaskItem = ({ task }) => {
   return (
     <div className='task_item'>
       <div className='task_item__title_container'>
-        <button
-          type='button'
-          onClick={handleToggle}
+        <MarkButton
+          done={done}
           disabled={isSubmitting}
-          className='task__item__mark_button'
-        >
-          {done ? (
-            <div className='task_item__mark____complete' aria-label='Completed'>
-              <CheckIcon className='task_item__mark____complete_check' />
-            </div>
-          ) : (
-            <div
-              className='task_item__mark____incomplete'
-              aria-label='Incomplete'
-            />
-          )}
-        </button>
+          onClick={handleToggle}
+          className='task_item__mark_button'
+        />
         <div className='task_item__title' data-done={done}>
           {title}
         </div>

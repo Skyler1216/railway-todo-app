@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import './TaskCreateForm.css'
-import { CheckIcon } from '~/icons/CheckIcon'
+import MarkButton from '~/components/ui/MarkButton'
+import Input from '~/components/ui/Input'
+import Textarea from '~/components/ui/Textarea'
 import { createTask } from '~/store/task'
 import Button from '~/components/ui/Button'
 
@@ -94,28 +96,14 @@ export const TaskCreateForm = () => {
       data-state={formState}
     >
       <div className='task_create_form__title_container'>
-        <button
-          type='button'
+        <MarkButton
+          done={done}
           onClick={handleToggle}
-          className='task_create_form__mark_button'
           onFocus={handleFocus}
           onBlur={handleBlur}
-        >
-          {done ? (
-            <div
-              className='task_create_form__mark____complete'
-              aria-label='Completed'
-            >
-              <CheckIcon className='task_create_form__mark____complete_check' />
-            </div>
-          ) : (
-            <div
-              className='task_create_form__mark____incomplete'
-              aria-label='Incomplete'
-            />
-          )}
-        </button>
-        <input
+          className='task_create_form__mark_button'
+        />
+        <Input
           type='text'
           className='task_create_form__title'
           placeholder='Add a new task...'
@@ -128,7 +116,7 @@ export const TaskCreateForm = () => {
       </div>
       {formState !== 'initial' && (
         <div>
-          <textarea
+          <Textarea
             ref={setElemTextarea}
             rows={1}
             className='task_create_form__detail'

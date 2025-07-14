@@ -37,31 +37,6 @@
 
 .task_create_form__mark_button {
   display: block;
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.task_create_form__mark____incomplete {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid var(--slate-300);
-}
-
-.task_create_form__mark____complete {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background: var(--indigo-600);
-}
-
-.task_create_form__mark____complete_check {
-  margin: 0.25rem;
-  fill: #ffffff;
 }
 
 .task_create_form__detail {

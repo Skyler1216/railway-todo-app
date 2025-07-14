@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { BackButton } from '~/components/BackButton'
 import './index.css'
@@ -7,6 +7,8 @@ import { setCurrentList } from '~/store/list'
 import { fetchTasks, updateTask, deleteTask } from '~/store/task'
 import { useId } from '~/hooks/useId'
 import Button from '~/components/ui/Button'
+import Input from '~/components/ui/Input'
+import Textarea from '~/components/ui/Textarea'
 
 const EditTask = () => {
   const id = useId()
@@ -90,9 +92,8 @@ const EditTask = () => {
           <label htmlFor={`${id}-title`} className='edit_list__form_label'>
             Title
           </label>
-          <input
+          <Input
             id={`${id}-title`}
-            className='app_input'
             placeholder='Buy some milk'
             value={title}
             onChange={event => setTitle(event.target.value)}
@@ -102,9 +103,8 @@ const EditTask = () => {
           <label htmlFor={`${id}-detail`} className='edit_list__form_label'>
             Description
           </label>
-          <textarea
+          <Textarea
             id={`${id}-detail`}
-            className='app_input'
             placeholder='Blah blah blah'
             value={detail}
             onChange={event => setDetail(event.target.value)}
