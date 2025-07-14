@@ -6,6 +6,7 @@ import './index.css'
 import { setCurrentList } from '~/store/list'
 import { fetchTasks, updateTask, deleteTask } from '~/store/task'
 import { useId } from '~/hooks/useId'
+import Button from '~/components/ui/Button'
 
 const EditTask = () => {
   const id = useId()
@@ -123,21 +124,21 @@ const EditTask = () => {
           </div>
         </fieldset>
         <div className='edit_list__form_actions'>
-          <Link to='/' data-variant='secondary' className='app_button'>
+          <Button variant='secondary' to='/'>
             Cancel
-          </Link>
+          </Button>
           <div className='edit_list__form_actions_spacer' />
-          <button
+          <Button
             type='button'
-            className='app_button edit_list__form_actions_delete'
+            variant='danger'
             disabled={isSubmitting}
             onClick={handleDelete}
           >
             Delete
-          </button>
-          <button type='submit' className='app_button' disabled={isSubmitting}>
+          </Button>
+          <Button type='submit' disabled={isSubmitting}>
             Update
-          </button>
+          </Button>
         </div>
       </form>
     </main>
