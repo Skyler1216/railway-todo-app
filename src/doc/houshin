@@ -34,3 +34,6 @@ signinページでのButtonコンポーネント使用 ✅
 3. InputコンポーネントのCSS分離
 4. 各ページでInputコンポーネントを使用するように修正
 5. 既存のapp_button, app_inputクラスの削除
+
+【進捗追記】
+- サインアップページのパスワード入力欄に autoComplete="new-password" を追加し、ブラウザ警告を解消 ✅
