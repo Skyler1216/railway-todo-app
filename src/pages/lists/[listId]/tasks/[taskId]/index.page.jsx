@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { BackButton } from '~/components/BackButton'
+import { Modal } from '~/components/Modal'
 import './index.css'
 import { setCurrentList } from '~/store/list'
 import { fetchTasks, updateTask, deleteTask } from '~/store/task'
@@ -29,6 +29,11 @@ const EditTask = () => {
   const task = useSelector(state =>
     state.task.tasks?.find(task => task.id === taskId)
   )
+
+  // モーダルを閉じる処理
+  const handleClose = useCallback(() => {
+    navigate(`/lists/${listId}`)
+  }, [navigate, listId])
 
   useEffect(() => {
     if (task) {
@@ -61,7 +66,7 @@ const EditTask = () => {
       void dispatch(updateTask(updateData))
         .unwrap()
         .then(() => {
-          navigate(`/lists/${listId}`)
+          handleClose() // モーダルを閉じる
         })
         .catch(err => {
           setErrorMessage(err.message)
@@ -70,7 +75,7 @@ const EditTask = () => {
           setIsSubmitting(false)
         })
     },
-    [title, taskId, listId, detail, done, limit, dispatch, navigate]
+    [title, taskId, listId, detail, done, limit, dispatch, handleClose]
   )
 
   const handleDelete = useCallback(() => {
@@ -83,7 +88,7 @@ const EditTask = () => {
     void dispatch(deleteTask({ id: taskId }))
       .unwrap()
       .then(() => {
-        navigate(`/`)
+        handleClose() // モーダルを閉じる
       })
       .catch(err => {
         setErrorMessage(err.message)
@@ -91,80 +96,85 @@ const EditTask = () => {
       .finally(() => {
         setIsSubmitting(false)
       })
-  }, [taskId, dispatch, navigate])
+  }, [taskId, dispatch, handleClose])
 
   return (
-    <main className='edit_list'>
-      <BackButton />
-      <h2 className='edit_list__title'>Edit List</h2>
-      <p className='edit_list__error'>{errorMessage}</p>
-      <form className='edit_list__form' onSubmit={onSubmit}>
-        <fieldset className='edit_list__form_field'>
-          <label htmlFor={`${id}-title`} className='edit_list__form_label'>
-            Title
-          </label>
-          <Input
-            id={`${id}-title`}
-            placeholder='Buy some milk'
-            value={title}
-            onChange={event => setTitle(event.target.value)}
-          />
-        </fieldset>
-        <fieldset className='edit_list__form_field'>
-          <label htmlFor={`${id}-detail`} className='edit_list__form_label'>
-            Description
-          </label>
-          <Textarea
-            id={`${id}-detail`}
-            placeholder='Blah blah blah'
-            value={detail}
-            onChange={event => setDetail(event.target.value)}
-          />
-        </fieldset>
-        <fieldset className='edit_list__form_field'>
-          <label htmlFor={`${id}-done`} className='edit_list__form_label'>
-            Is Done
-          </label>
-          <div>
-            <input
-              id={`${id}-done`}
-              type='checkbox'
-              checked={done}
-              onChange={event => setDone(event.target.checked)}
+    <Modal
+      isOpen={true}
+      onClose={handleClose}
+      title='Edit Task'
+      className='edit-task-modal'
+    >
+      <div className='edit_list'>
+        <p className='edit_list__error'>{errorMessage}</p>
+        <form className='edit_list__form' onSubmit={onSubmit}>
+          <fieldset className='edit_list__form_field'>
+            <label htmlFor={`${id}-title`} className='edit_list__form_label'>
+              Title
+            </label>
+            <Input
+              id={`${id}-title`}
+              placeholder='Buy some milk'
+              value={title}
+              onChange={event => setTitle(event.target.value)}
             />
+          </fieldset>
+          <fieldset className='edit_list__form_field'>
+            <label htmlFor={`${id}-detail`} className='edit_list__form_label'>
+              Description
+            </label>
+            <Textarea
+              id={`${id}-detail`}
+              placeholder='Blah blah blah'
+              value={detail}
+              onChange={event => setDetail(event.target.value)}
+            />
+          </fieldset>
+          <fieldset className='edit_list__form_field'>
+            <label htmlFor={`${id}-done`} className='edit_list__form_label'>
+              Is Done
+            </label>
+            <div>
+              <input
+                id={`${id}-done`}
+                type='checkbox'
+                checked={done}
+                onChange={event => setDone(event.target.checked)}
+              />
+            </div>
+          </fieldset>
+          <fieldset className='edit_list__form_field'>
+            <label htmlFor={`${id}-limit`} className='edit_list__form_label'>
+              期限
+            </label>
+            <Input
+              id={`${id}-limit`}
+              type='datetime-local'
+              value={limit}
+              onChange={e => setLimit(e.target.value)}
+              disabled={isSubmitting}
+            />
+          </fieldset>
+          <div className='edit_list__form_actions'>
+            <Button type='button' variant='secondary' onClick={handleClose}>
+              Cancel
+            </Button>
+            <div className='edit_list__form_actions_spacer' />
+            <Button
+              type='button'
+              variant='danger'
+              disabled={isSubmitting}
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+            <Button type='submit' disabled={isSubmitting}>
+              Update
+            </Button>
           </div>
-        </fieldset>
-        <fieldset className='edit_list__form_field'>
-          <label htmlFor={`${id}-limit`} className='edit_list__form_label'>
-            期限
-          </label>
-          <Input
-            id={`${id}-limit`}
-            type='datetime-local'
-            value={limit}
-            onChange={e => setLimit(e.target.value)}
-            disabled={isSubmitting}
-          />
-        </fieldset>
-        <div className='edit_list__form_actions'>
-          <Button variant='secondary' to='/'>
-            Cancel
-          </Button>
-          <div className='edit_list__form_actions_spacer' />
-          <Button
-            type='button'
-            variant='danger'
-            disabled={isSubmitting}
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-          <Button type='submit' disabled={isSubmitting}>
-            Update
-          </Button>
-        </div>
-      </form>
-    </main>
+        </form>
+      </div>
+    </Modal>
   )
 }
 

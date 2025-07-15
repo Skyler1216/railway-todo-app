@@ -25,8 +25,9 @@ export const Router = () => {
               <Route path='/' element={<Home />} />
               <Route path='/lists/:listId' element={<ListIndex />} />
               <Route path='/list/new' element={<NewList />} />
+              {/* モーダル表示用のルート */}
               <Route
-                path='/lists/:listId/tasks/:taskId'
+                path='/lists/:listId/tasks/:taskId/edit'
                 element={<EditTask />}
               />
               <Route path='/lists/:listId/edit' element={<EditList />} />

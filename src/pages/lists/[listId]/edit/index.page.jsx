@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { BackButton } from '~/components/BackButton'
+import { Modal } from '~/components/Modal'
 import './index.css'
 import { fetchLists, updateList, deleteList } from '~/store/list'
 import { useId } from '~/hooks/useId'
@@ -16,13 +16,17 @@ const EditList = () => {
   const dispatch = useDispatch()
 
   const [title, setTitle] = useState('')
-
   const [errorMessage, setErrorMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const list = useSelector(state =>
     state.list.lists?.find(list => list.id === listId)
   )
+
+  // モーダルを閉じる処理
+  const handleClose = useCallback(() => {
+    navigate(`/lists/${listId}`)
+  }, [navigate, listId])
 
   useEffect(() => {
     if (list) {
@@ -43,7 +47,7 @@ const EditList = () => {
       void dispatch(updateList({ id: listId, title }))
         .unwrap()
         .then(() => {
-          navigate(`/lists/${listId}`)
+          handleClose() // モーダルを閉じる
         })
         .catch(err => {
           setErrorMessage(err.message)
@@ -52,7 +56,7 @@ const EditList = () => {
           setIsSubmitting(false)
         })
     },
-    [title, listId, dispatch, navigate]
+    [title, listId, dispatch, handleClose]
   )
 
   const handleDelete = useCallback(() => {
@@ -65,7 +69,7 @@ const EditList = () => {
     void dispatch(deleteList({ id: listId }))
       .unwrap()
       .then(() => {
-        navigate(`/`)
+        navigate(`/`) // 削除後はホームに戻る
       })
       .catch(err => {
         setErrorMessage(err.message)
@@ -76,41 +80,46 @@ const EditList = () => {
   }, [listId, dispatch, navigate])
 
   return (
-    <main className='edit_list'>
-      <BackButton />
-      <h2 className='edit_list__title'>Edit List</h2>
-      <p className='edit_list__error'>{errorMessage}</p>
-      <form className='edit_list__form' onSubmit={onSubmit}>
-        <fieldset className='edit_list__form_field'>
-          <label htmlFor={`${id}-title`} className='edit_list__form_label'>
-            Name
-          </label>
-          <Input
-            id={`${id}-title`}
-            placeholder='Family'
-            value={title}
-            onChange={event => setTitle(event.target.value)}
-          />
-        </fieldset>
-        <div className='edit_list__form_actions'>
-          <Button variant='secondary' to='/'>
-            Cancel
-          </Button>
-          <div className='edit_list__form_actions_spacer' />
-          <Button
-            type='button'
-            variant='danger'
-            disabled={isSubmitting}
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-          <Button type='submit' disabled={isSubmitting}>
-            Update
-          </Button>
-        </div>
-      </form>
-    </main>
+    <Modal
+      isOpen={true}
+      onClose={handleClose}
+      title='Edit List'
+      className='edit-list-modal'
+    >
+      <div className='edit_list'>
+        <p className='edit_list__error'>{errorMessage}</p>
+        <form className='edit_list__form' onSubmit={onSubmit}>
+          <fieldset className='edit_list__form_field'>
+            <label htmlFor={`${id}-title`} className='edit_list__form_label'>
+              Name
+            </label>
+            <Input
+              id={`${id}-title`}
+              placeholder='Family'
+              value={title}
+              onChange={event => setTitle(event.target.value)}
+            />
+          </fieldset>
+          <div className='edit_list__form_actions'>
+            <Button type='button' variant='secondary' onClick={handleClose}>
+              Cancel
+            </Button>
+            <div className='edit_list__form_actions_spacer' />
+            <Button
+              type='button'
+              variant='danger'
+              disabled={isSubmitting}
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+            <Button type='submit' disabled={isSubmitting}>
+              Update
+            </Button>
+          </div>
+        </form>
+      </div>
+    </Modal>
   )
 }
 

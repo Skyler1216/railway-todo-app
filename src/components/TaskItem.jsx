@@ -40,7 +40,7 @@ export const TaskItem = ({ task }) => {
         </div>
         <div aria-hidden className='task_item__title_spacer' />
         <Link
-          to={`/lists/${listId}/tasks/${id}`}
+          to={`/lists/${listId}/tasks/${id}/edit`}
           className='task_item__title_action'
         >
           <PencilIcon aria-label='Edit' />
