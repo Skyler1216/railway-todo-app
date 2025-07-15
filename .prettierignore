@@ -24,4 +24,7 @@ coverage/
 
 # OS files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# ESLint設定
+eslint.config.js 
