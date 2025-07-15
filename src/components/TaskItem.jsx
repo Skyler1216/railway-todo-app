@@ -4,13 +4,18 @@ import { useDispatch } from 'react-redux'
 import { PencilIcon } from '~/icons/PencilIcon'
 import MarkButton from '~/components/ui/MarkButton'
 import { updateTask } from '~/store/task'
+import {
+  formatRemainingTime,
+  formatLimitDate,
+  calculateRemainingTime,
+} from '~/utils/dateUtils'
 import './TaskItem.css'
 
 export const TaskItem = ({ task }) => {
   const dispatch = useDispatch()
 
   const { listId } = useParams()
-  const { id, title, detail, done } = task
+  const { id, title, detail, done, limit } = task
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -42,6 +47,19 @@ export const TaskItem = ({ task }) => {
         </Link>
       </div>
       <div className='task_item__detail'>{detail}</div>
+      {limit && (
+        <div className='task_item__limit'>
+          <span className='task_item__limit_date'>
+            {formatLimitDate(limit)}
+          </span>
+          <span
+            className='task_item__limit_remaining'
+            data-overdue={calculateRemainingTime(limit)?.isOverdue || false}
+          >
+            {formatRemainingTime(limit)}
+          </span>
+        </div>
+      )}
     </div>
   )
 }

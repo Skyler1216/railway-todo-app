@@ -6,6 +6,7 @@ import Input from '~/components/ui/Input'
 import Textarea from '~/components/ui/Textarea'
 import { createTask } from '~/store/task'
 import Button from '~/components/ui/Button'
+import { fromDateTimeLocal } from '~/utils/dateUtils'
 
 export const TaskCreateForm = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export const TaskCreateForm = () => {
   const [title, setTitle] = useState('')
   const [detail, setDetail] = useState('')
   const [done, setDone] = useState(false)
+  const [limit, setLimit] = useState('')
 
   const handleToggle = useCallback(() => {
     setDone(prev => !prev)
@@ -28,7 +30,7 @@ export const TaskCreateForm = () => {
   }, [])
 
   const handleBlur = useCallback(() => {
-    if (title || detail) {
+    if (title || detail || limit) {
       return
     }
 
@@ -42,11 +44,12 @@ export const TaskCreateForm = () => {
       setFormState('initial')
       setDone(false)
     }, 100)
-  }, [title, detail])
+  }, [title, detail, limit])
 
   const handleDiscard = useCallback(() => {
     setTitle('')
     setDetail('')
+    setLimit('')
     setFormState('initial')
     setDone(false)
   }, [])
@@ -57,7 +60,16 @@ export const TaskCreateForm = () => {
 
       setFormState('submitting')
 
-      void dispatch(createTask({ title, detail, done }))
+      // limitフィールドをDateオブジェクトに変換
+      const taskData = { title, detail, done }
+      if (limit) {
+        const limitDate = fromDateTimeLocal(limit)
+        if (limitDate) {
+          taskData.limit = limitDate
+        }
+      }
+
+      void dispatch(createTask(taskData))
         .unwrap()
         .then(() => {
           handleDiscard()
@@ -67,7 +79,7 @@ export const TaskCreateForm = () => {
           setFormState('focused')
         })
     },
-    [title, detail, done, dispatch, handleDiscard]
+    [title, detail, done, limit, dispatch, handleDiscard]
   )
 
   useEffect(() => {
@@ -126,13 +138,32 @@ export const TaskCreateForm = () => {
             onBlur={handleBlur}
             disabled={formState === 'submitting'}
           />
+          <div className='task_create_form__limit'>
+            <label
+              htmlFor='task-limit'
+              className='task_create_form__limit_label'
+            >
+              期限
+            </label>
+            <Input
+              id='task-limit'
+              type='datetime-local'
+              className='task_create_form__limit_input'
+              value={limit}
+              onChange={e => setLimit(e.target.value)}
+              onBlur={handleBlur}
+              disabled={formState === 'submitting'}
+            />
+          </div>
           <div className='task_create_form__actions'>
             <Button
               type='button'
               variant='secondary'
               onBlur={handleBlur}
               onClick={handleDiscard}
-              disabled={(!title && !detail) || formState === 'submitting'}
+              disabled={
+                (!title && !detail && !limit) || formState === 'submitting'
+              }
             >
               Discard
             </Button>

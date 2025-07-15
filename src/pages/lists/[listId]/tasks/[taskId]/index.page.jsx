@@ -9,6 +9,7 @@ import { useId } from '~/hooks/useId'
 import Button from '~/components/ui/Button'
 import Input from '~/components/ui/Input'
 import Textarea from '~/components/ui/Textarea'
+import { fromDateTimeLocal, toDateTimeLocal } from '~/utils/dateUtils'
 
 const EditTask = () => {
   const id = useId()
@@ -20,6 +21,7 @@ const EditTask = () => {
   const [title, setTitle] = useState('')
   const [detail, setDetail] = useState('')
   const [done, setDone] = useState(false)
+  const [limit, setLimit] = useState('')
 
   const [errorMessage, setErrorMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -33,6 +35,7 @@ const EditTask = () => {
       setTitle(task.title)
       setDetail(task.detail)
       setDone(task.done)
+      setLimit(task.limit ? toDateTimeLocal(new Date(task.limit)) : '')
     }
   }, [task])
 
@@ -47,7 +50,15 @@ const EditTask = () => {
 
       setIsSubmitting(true)
 
-      void dispatch(updateTask({ id: taskId, title, detail, done }))
+      const updateData = { id: taskId, title, detail, done }
+      if (limit) {
+        const limitDate = fromDateTimeLocal(limit)
+        if (limitDate) {
+          updateData.limit = limitDate
+        }
+      }
+
+      void dispatch(updateTask(updateData))
         .unwrap()
         .then(() => {
           navigate(`/lists/${listId}`)
@@ -59,7 +70,7 @@ const EditTask = () => {
           setIsSubmitting(false)
         })
     },
-    [title, taskId, listId, detail, done, dispatch, navigate]
+    [title, taskId, listId, detail, done, limit, dispatch, navigate]
   )
 
   const handleDelete = useCallback(() => {
@@ -122,6 +133,18 @@ const EditTask = () => {
               onChange={event => setDone(event.target.checked)}
             />
           </div>
+        </fieldset>
+        <fieldset className='edit_list__form_field'>
+          <label htmlFor={`${id}-limit`} className='edit_list__form_label'>
+            期限
+          </label>
+          <Input
+            id={`${id}-limit`}
+            type='datetime-local'
+            value={limit}
+            onChange={e => setLimit(e.target.value)}
+            disabled={isSubmitting}
+          />
         </fieldset>
         <div className='edit_list__form_actions'>
           <Button variant='secondary' to='/'>

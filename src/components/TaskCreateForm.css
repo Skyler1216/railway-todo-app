@@ -58,6 +58,23 @@
   outline: none;
 }
 
+.task_create_form__limit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.task_create_form__limit_label {
+  color: var(--slate-600);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.task_create_form__limit_input {
+  width: 100%;
+}
+
 .task_create_form__actions {
   margin-top: 1rem;
   display: flex;

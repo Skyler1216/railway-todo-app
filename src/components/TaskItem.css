@@ -49,3 +49,28 @@
   font-size: 1rem;
   color: var(--slate-500);
 }
+
+.task_item__limit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--slate-200);
+}
+
+.task_item__limit_date {
+  font-size: 0.875rem;
+  color: var(--slate-600);
+  font-weight: 500;
+}
+
+.task_item__limit_remaining {
+  font-size: 0.75rem;
+  color: var(--slate-500);
+}
+
+.task_item__limit_remaining[data-overdue="true"] {
+  color: var(--red-500);
+  font-weight: 500;
+}
