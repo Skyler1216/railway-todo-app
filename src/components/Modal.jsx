@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import './Modal.css'
 
 export const Modal = ({ isOpen, onClose, title, children, className = '' }) => {

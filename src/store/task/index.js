@@ -55,6 +55,7 @@ export const taskSlice = createSlice({
     /**
      * 新しいタスクを追加
      * 期限（limit）フィールドも含めて保存
+     * 注意: limitは文字列形式で保存（Dateオブジェクトは保存しない）
      */
     addTask: (state, action) => {
       const title = action.payload.title
@@ -184,12 +185,14 @@ export const createTask = createAsyncThunk(
       const id = res.data.id
 
       // 作成されたタスクを状態に追加
-      thunkApi.dispatch(
-        addTask({
-          ...payload,
-          id,
-        })
-      )
+      // limitは文字列形式で保存するため、DateオブジェクトをISO文字列に変換
+      const taskData = { ...payload, id }
+      if (payload.limit) {
+        const { toISOString } = await import('~/utils/dateUtils')
+        taskData.limit = toISOString(payload.limit)
+      }
+
+      thunkApi.dispatch(addTask(taskData))
     } catch (e) {
       // エラーハンドリング
       handleThunkError(e, thunkApi)
@@ -241,7 +244,14 @@ export const updateTask = createAsyncThunk(
       await axios.put(`/lists/${listId}/tasks/${payload.id}`, apiPayload)
 
       // 状態を更新
-      thunkApi.dispatch(mutateTask(payload))
+      // limitは文字列形式で保存するため、DateオブジェクトをISO文字列に変換
+      const updateData = { ...payload }
+      if (payload.limit) {
+        const { toISOString } = await import('~/utils/dateUtils')
+        updateData.limit = toISOString(payload.limit)
+      }
+
+      thunkApi.dispatch(mutateTask(updateData))
     } catch (e) {
       // エラーハンドリング
       handleThunkError(e, thunkApi)

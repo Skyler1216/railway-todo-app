@@ -70,7 +70,7 @@
   color: var(--slate-500);
 }
 
-.task_item__limit_remaining[data-overdue="true"] {
+.task_item__limit_remaining[data-overdue='true'] {
   color: var(--red-500);
   font-weight: 500;
 }

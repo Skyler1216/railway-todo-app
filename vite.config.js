@@ -12,4 +12,10 @@ export default defineConfig({
       '~': '/src',
     },
   },
+  // ファイル保存時に自動的にESLint修正を実行
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.jsx?$/,
+    exclude: [],
+  },
 })

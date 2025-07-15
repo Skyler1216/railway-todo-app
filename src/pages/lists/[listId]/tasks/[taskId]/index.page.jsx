@@ -40,6 +40,7 @@ const EditTask = () => {
       setTitle(task.title)
       setDetail(task.detail)
       setDone(task.done)
+      // task.limitは文字列形式なので、Dateオブジェクトに変換してからdatetime-local形式に変換
       setLimit(task.limit ? toDateTimeLocal(new Date(task.limit)) : '')
     }
   }, [task])
@@ -75,7 +76,7 @@ const EditTask = () => {
           setIsSubmitting(false)
         })
     },
-    [title, taskId, listId, detail, done, limit, dispatch, handleClose]
+    [title, taskId, detail, done, limit, dispatch, handleClose]
   )
 
   const handleDelete = useCallback(() => {
