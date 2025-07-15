@@ -86,3 +86,11 @@
   padding-left: 360px;
   min-height: 100vh;
 }
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .main_content {
+    padding: 80px 20px 20px 20px;
+    padding-left: 20px;
+  }
+}

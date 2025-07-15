@@ -2,14 +2,17 @@ import { ListIcon } from '~/icons/ListIcon'
 import './Sidebar.css'
 import { Link, useLocation } from 'react-router-dom'
 import { PlusIcon } from '~/icons/PlusIcon'
+import { HamburgerIcon } from '~/icons/HamburgerIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLogout } from '~/hooks/useLogout'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchLists } from '~/store/list/index'
 
 export const Sidebar = () => {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const lists = useSelector(state => state.list.lists)
   const activeId = useSelector(state => state.list.current)
@@ -25,9 +28,34 @@ export const Sidebar = () => {
     void dispatch(fetchLists())
   }, [dispatch])
 
-  return (
-    <div className='sidebar'>
-      <Link to='/'>
+  // モバイル判定とリサイズ対応
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
+
+  // モバイルメニューを閉じる
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+  }
+
+  // モバイルメニューを開く
+  const openMobileMenu = () => {
+    setIsMobileMenuOpen(true)
+  }
+
+  // サイドバーの内容
+  const sidebarContent = (
+    <>
+      <Link to='/' onClick={closeMobileMenu}>
         <h1 className='sidebar__title'>Todos</h1>
       </Link>
       {isLoggedIn ? (
@@ -42,6 +70,7 @@ export const Sidebar = () => {
                       data-active={shouldHighlight && listItem.id === activeId}
                       to={`/lists/${listItem.id}`}
                       className='sidebar__lists_item'
+                      onClick={closeMobileMenu}
                     >
                       <ListIcon aria-hidden className='sidebar__lists_icon' />
                       {listItem.title}
@@ -49,7 +78,11 @@ export const Sidebar = () => {
                   </li>
                 ))}
                 <li>
-                  <Link to='/list/new' className='sidebar__lists_button'>
+                  <Link
+                    to='/list/new'
+                    className='sidebar__lists_button'
+                    onClick={closeMobileMenu}
+                  >
                     <PlusIcon className='sidebar__lists_plus_icon' />
                     New List...
                   </Link>
@@ -63,7 +96,10 @@ export const Sidebar = () => {
             <button
               type='button'
               className='sidebar__account_logout'
-              onClick={logout}
+              onClick={() => {
+                logout()
+                closeMobileMenu()
+              }}
             >
               Logout
             </button>
@@ -71,11 +107,42 @@ export const Sidebar = () => {
         </>
       ) : (
         <>
-          <Link to='/signin' className='sidebar__login'>
+          <Link
+            to='/signin'
+            className='sidebar__login'
+            onClick={closeMobileMenu}
+          >
             Login
           </Link>
         </>
       )}
-    </div>
+    </>
+  )
+
+  return (
+    <>
+      {/* ハンバーガーメニューボタン（モバイル時のみ表示） */}
+      {isMobile && (
+        <button
+          className='mobile-menu-button'
+          onClick={openMobileMenu}
+          aria-label='メニューを開く'
+        >
+          <HamburgerIcon />
+        </button>
+      )}
+
+      {/* モバイルオーバーレイ */}
+      {isMobile && isMobileMenuOpen && (
+        <div className='mobile-overlay' onClick={closeMobileMenu} />
+      )}
+
+      {/* サイドバー */}
+      <div
+        className={`sidebar ${isMobile ? 'sidebar--mobile' : ''} ${isMobileMenuOpen ? 'sidebar--open' : ''}`}
+      >
+        {sidebarContent}
+      </div>
+    </>
   )
 }
