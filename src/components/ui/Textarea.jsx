@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import './Textarea.css'
 
-const Textarea = forwardRef(({ rows = 1, className = '', ...props }, ref) => {
+const Textarea = forwardRef(({ rows = 5, className = '', ...props }, ref) => {
   const baseClassName = 'ui-textarea'
   const combinedClassName = `${baseClassName} ${className}`.trim()
 

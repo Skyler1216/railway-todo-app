@@ -118,7 +118,7 @@ export const TaskCreateForm = () => {
         <div>
           <Textarea
             ref={setElemTextarea}
-            rows={1}
+            rows={5}
             className='task_create_form__detail'
             placeholder='Add a description here...'
             value={detail}
