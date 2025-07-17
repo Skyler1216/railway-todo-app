@@ -42,3 +42,33 @@
   color: var(--slate-500);
   font-size: 0.875rem;
 }
+
+/* ローディングスピナー */
+.tasks_list__loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.loading-spinner {
+  color: var(--slate-500);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* エラーメッセージ */
+.tasks_list__error {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--red-50);
+  border: 1px solid var(--red-200);
+  border-radius: 0.5rem;
+}
+
+.error-message {
+  color: var(--red-700);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}

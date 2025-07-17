@@ -1,25 +1,30 @@
-.task_create_form {
+/* TaskForm共通スタイル */
+.task_form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+/* 新規作成時のスタイル */
+.task_form--create {
   background: #ffffff;
   border-radius: 0.5rem;
   padding: 1.5rem;
   border: 1px solid var(--slate-200);
 }
 
-.task_create_form[data-state='focused'] {
+.task_form--create[data-state='focused'] {
   border-color: var(--indigo-600);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
 
-.task_create_form__title_container {
+.task_form__title_container {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.task_create_form__title {
+.task_form__title {
   flex: 1;
   font-size: 1.25rem;
   font-weight: 500;
@@ -27,19 +32,19 @@
   background: transparent;
 }
 
-.task_create_form__title::placeholder {
+.task_form__title::placeholder {
   color: var(--slate-500);
 }
 
-.task_create_form__title:focus {
+.task_form__title:focus {
   outline: none;
 }
 
-.task_create_form__mark_button {
+.task_form__mark_button {
   display: block;
 }
 
-.task_create_form__detail {
+.task_form__detail {
   font-size: 1rem;
   line-height: 1.5rem;
   font: inherit;
@@ -50,32 +55,32 @@
   width: 100%;
 }
 
-.task_create_form__detail::placeholder {
+.task_form__detail::placeholder {
   color: var(--slate-300);
 }
 
-.task_create_form__detail:focus {
+.task_form__detail:focus {
   outline: none;
 }
 
-.task_create_form__limit {
+.task_form__limit {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin-top: 1rem;
 }
 
-.task_create_form__limit_label {
+.task_form__limit_label {
   color: var(--slate-600);
   font-weight: 500;
   font-size: 0.875rem;
 }
 
-.task_create_form__limit_input {
+.task_form__limit_input {
   width: 100%;
 }
 
-.task_create_form__actions {
+.task_form__actions {
   margin-top: 1rem;
   display: flex;
   align-items: center;
@@ -83,6 +88,31 @@
   gap: 0.5rem;
 }
 
-.task_create_form__spacer {
+.task_form__spacer {
   flex: 1;
+}
+
+/* 編集時のスタイル */
+.task_form--edit {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.task_form__form_field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task_form__form_label {
+  color: var(--slate-600);
+  font-weight: 500;
+}
+
+.task_form__form_actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
 }
