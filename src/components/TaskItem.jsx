@@ -95,7 +95,7 @@ export const TaskItem = ({ task }) => {
         <div className='task_item__limit'>
           {/* 期限日時（例: 2024年12月31日 23:59） */}
           <span className='task_item__limit_date'>
-            {formatLimitDate(limit)}
+            期限: {formatLimitDate(limit)}
           </span>
 
           {/* 残り時間（例: 3日2時間後、期限切れ） */}
