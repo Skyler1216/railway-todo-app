@@ -5,8 +5,8 @@ import { BackButton } from '~/components/BackButton'
 import './index.css'
 import { createList, setCurrentList } from '~/store/list/index'
 import { useId } from '~/hooks/useId'
-import Button from '~/components/ui/Button'
 import Input from '~/components/ui/Input'
+import FormActions from '~/components/ui/FormActions'
 
 const NewList = () => {
   const id = useId()
@@ -57,15 +57,14 @@ const NewList = () => {
             onChange={event => setTitle(event.target.value)}
           />
         </fieldset>
-        <div className='new_list__form_actions'>
-          <Button variant='secondary' to='/'>
-            Cancel
-          </Button>
-          <div className='new_list__form_actions_spacer' />
-          <Button type='submit' disabled={isSubmitting}>
-            Create
-          </Button>
-        </div>
+        <FormActions
+          onCancel={() => navigate('/')}
+          isSubmitting={isSubmitting}
+          submitText='Create'
+          cancelText='Cancel'
+          showDelete={false}
+          className='new_list__form_actions'
+        />
       </form>
     </main>
   )

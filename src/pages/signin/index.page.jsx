@@ -3,8 +3,8 @@ import { Navigate } from 'react-router-dom' // リダイレクト用コンポー
 import { useSelector } from 'react-redux' // Reduxの状態取得フック
 import { useLogin } from '~/hooks/useLogin' // カスタムログインフック
 import { useId } from '~/hooks/useId' // ユニークID生成フック
-import Button from '~/components/ui/Button' // UIボタンコンポーネント
 import Input from '~/components/ui/Input' // UI入力コンポーネント
+import FormActions from '~/components/ui/FormActions' // フォームアクションコンポーネント
 import './index.css' // このページ専用のスタイル
 
 const SignIn = () => {
@@ -76,19 +76,15 @@ const SignIn = () => {
             onChange={event => setPassword(event.target.value)} // 入力値の変更を状態に反映
           />
         </fieldset>
-        <div className='signin__form_actions'>
-          {/* ボタン配置エリア */}
-          <Button variant='secondary' to='/signup'>
-            {/* サインアップページへのリンクボタン */}
-            Register {/* ボタンテキスト */}
-          </Button>
-          <div className='signin__form_actions_spacer' />
-          {/* ボタン間のスペーサー */}
-          <Button type='submit' disabled={isSubmitting}>
-            {/* ログイン送信ボタン（送信中は無効化） */}
-            Login {/* ボタンテキスト */}
-          </Button>
-        </div>
+        <FormActions
+          onCancel={() => {}} // サインインページではキャンセルは不要
+          isSubmitting={isSubmitting}
+          submitText='Login'
+          cancelText='Register'
+          showDelete={false}
+          cancelTo='/signup'
+          className='signin__form_actions'
+        />
       </form>
     </main>
   )

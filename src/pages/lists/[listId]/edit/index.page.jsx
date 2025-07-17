@@ -5,8 +5,8 @@ import { Modal } from '~/components/Modal'
 import './index.css'
 import { fetchLists, updateList, deleteList } from '~/store/list'
 import { useId } from '~/hooks/useId'
-import Button from '~/components/ui/Button'
 import Input from '~/components/ui/Input'
+import FormActions from '~/components/ui/FormActions'
 
 const EditList = () => {
   const id = useId()
@@ -100,23 +100,16 @@ const EditList = () => {
               onChange={event => setTitle(event.target.value)}
             />
           </fieldset>
-          <div className='edit_list__form_actions'>
-            <Button type='button' variant='secondary' onClick={handleClose}>
-              Cancel
-            </Button>
-            <div className='edit_list__form_actions_spacer' />
-            <Button
-              type='button'
-              variant='danger'
-              disabled={isSubmitting}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-            <Button type='submit' disabled={isSubmitting}>
-              Update
-            </Button>
-          </div>
+          <FormActions
+            onCancel={handleClose}
+            onDelete={handleDelete}
+            isSubmitting={isSubmitting}
+            submitText='Update'
+            cancelText='Cancel'
+            deleteText='Delete'
+            showDelete={true}
+            className='edit_list__form_actions'
+          />
         </form>
       </div>
     </Modal>

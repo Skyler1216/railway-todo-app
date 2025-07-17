@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 import './index.css'
 import { useSignup } from '~/hooks/useSignup'
 import { useId } from '~/hooks/useId'
-import Button from '~/components/ui/Button'
 import Input from '~/components/ui/Input'
+import FormActions from '~/components/ui/FormActions'
 
 const SignUp = () => {
   const auth = useSelector(state => state.auth.token !== null)
@@ -88,15 +88,15 @@ const SignUp = () => {
             autoComplete='new-password'
           />
         </fieldset>
-        <div className='signup__form_actions'>
-          <Button variant='secondary' to='/signin'>
-            Login
-          </Button>
-          <div className='signup__form_actions_spacer' />
-          <Button type='submit' disabled={isSubmitting}>
-            Register
-          </Button>
-        </div>
+        <FormActions
+          onCancel={() => {}} // サインアップページではキャンセルは不要
+          isSubmitting={isSubmitting}
+          submitText='Register'
+          cancelText='Login'
+          showDelete={false}
+          cancelTo='/signin'
+          className='signup__form_actions'
+        />
       </form>
     </main>
   )

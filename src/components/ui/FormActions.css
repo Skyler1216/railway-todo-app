@@ -1,0 +1,73 @@
+/**
+ * フォームアクションコンポーネントのスタイル
+ * 
+ * 汎用的なフォームボタン配置のスタイルを定義
+ * 既存の各ページのフォームアクションスタイルを統一
+ */
+
+.form_actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.form_actions_spacer {
+  flex: 1;
+}
+
+/* 既存のページ固有のスタイルとの互換性を保つためのクラス */
+.edit_list__form_actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.edit_list__form_actions_spacer {
+  flex: 1;
+}
+
+.edit_list__form_actions_delete {
+  --app-button-accent-color: var(--red-500);
+}
+
+.signin__form_actions,
+.signup__form_actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.signin__form_actions_spacer,
+.signup__form_actions_spacer {
+  flex: 1;
+}
+
+.new_list__form_actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.new_list__form_actions_spacer {
+  flex: 1;
+}
+
+.edit_task__form_actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.edit_task__form_actions_spacer {
+  flex: 1;
+}
+
+.edit_task__form_actions_delete {
+  --app-button-accent-color: var(--red-500);
+}

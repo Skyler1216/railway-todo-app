@@ -6,9 +6,9 @@ import './index.css'
 import { setCurrentList } from '~/store/list'
 import { fetchTasks, updateTask, deleteTask } from '~/store/task'
 import { useId } from '~/hooks/useId'
-import Button from '~/components/ui/Button'
 import Input from '~/components/ui/Input'
 import Textarea from '~/components/ui/Textarea'
+import FormActions from '~/components/ui/FormActions'
 import { fromDateTimeLocal, toDateTimeLocal } from '~/utils/dateUtils'
 
 const EditTask = () => {
@@ -156,23 +156,16 @@ const EditTask = () => {
               disabled={isSubmitting}
             />
           </fieldset>
-          <div className='edit_list__form_actions'>
-            <Button type='button' variant='secondary' onClick={handleClose}>
-              Cancel
-            </Button>
-            <div className='edit_list__form_actions_spacer' />
-            <Button
-              type='button'
-              variant='danger'
-              disabled={isSubmitting}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-            <Button type='submit' disabled={isSubmitting}>
-              Update
-            </Button>
-          </div>
+          <FormActions
+            onCancel={handleClose}
+            onDelete={handleDelete}
+            isSubmitting={isSubmitting}
+            submitText='Update'
+            cancelText='Cancel'
+            deleteText='Delete'
+            showDelete={true}
+            className='edit_list__form_actions'
+          />
         </form>
       </div>
     </Modal>
