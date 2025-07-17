@@ -149,12 +149,13 @@ export const calculateRemainingTime = limitDate => {
  * 残り日時をユーザーフレンドリーな文字列で表示
  *
  * 日本語で分かりやすい形式で残り時間を表示します。
+ * 分単位まで考慮した詳細な表示を行います。
  *
  * @param {string|Date} limitDate - 期限日時
  * @returns {string} 表示用の文字列
  *
  * 表示例:
- * - "3日2時間後"（1日以上）
+ * - "3日2時間30分後"（1日以上）
  * - "2時間30分後"（1日未満、1時間以上）
  * - "30分後"（1時間未満、1分以上）
  * - "まもなく期限"（1分未満）
@@ -171,7 +172,7 @@ export const formatRemainingTime = limitDate => {
 
   // 日数がある場合
   if (remaining.days > 0) {
-    return `${remaining.days}日${remaining.hours}時間後`
+    return `${remaining.days}日${remaining.hours}時間${remaining.minutes}分後`
   }
   // 時間がある場合
   else if (remaining.hours > 0) {
