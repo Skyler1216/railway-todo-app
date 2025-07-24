@@ -14,12 +14,9 @@ import './Modal.css'
  * @param {string} className - 追加のCSSクラス名
  */
 export const Modal = ({ isOpen, onClose, title, children, className = '' }) => {
-  // モーダル本体のDOM要素への参照（フォーカストラップ用）
-  const modalRef = useRef(null)
-  // オーバーレイのDOM要素への参照（クリック判定用）
-  const overlayRef = useRef(null)
-  // モーダル表示前のアクティブ要素を保存（フォーカス復元用）
-  const previousActiveElement = useRef(null)
+  const modalRef = useRef(null) // モーダル本体のDOM要素への参照（フォーカストラップ用）
+  const overlayRef = useRef(null) // オーバーレイのDOM要素への参照（クリック判定用）
+  const previousActiveElement = useRef(null) // モーダル表示前のアクティブ要素を保存（フォーカス復元用）
 
   /**
    * キーボードイベントハンドラー
