@@ -1,97 +1,99 @@
-/* ハンバーガーメニューボタン */
+/* ハンバーガーメニューボタン（モバイルナビゲーション用） */
 .mobile-menu-button {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: var(--slate-100);
-  border: 1px solid var(--slate-200);
-  border-radius: 0.375rem;
-  color: var(--slate-600);
-  cursor: pointer;
-  transition: all 0.2s ease;
+  position: fixed; /* 画面に固定表示（スクロールしても位置が変わらない） */
+  top: 1rem; /* 上部から1rem（16px）の位置 */
+  left: 1rem; /* 左端から1rem（16px）の位置 */
+  z-index: 1000; /* 他の要素より前面に表示（サイドバーより上） */
+  display: none; /* デフォルトでは非表示（デスクトップ時） */
+  align-items: center; /* 縦方向の中央揃え（アイコンを中央配置） */
+  justify-content: center; /* 横方向の中央揃え（アイコンを中央配置） */
+  width: 3rem; /* 幅3rem（48px） */
+  height: 3rem; /* 高さ3rem（48px） */
+  background-color: var(--slate-100); /* 薄いグレーの背景 */
+  border: 1px solid var(--slate-200); /* グレーの境界線 */
+  border-radius: 0.375rem; /* 角を丸く */
+  color: var(--slate-600); /* グレーの文字色 */
+  cursor: pointer; /* マウスカーソルをポインターに */
+  transition: all 0.2s ease; /* ホバー時のアニメーション（0.2秒） */
 }
 
 .mobile-menu-button:hover {
-  background-color: var(--slate-200);
-  color: var(--slate-700);
+  background-color: var(--slate-200); /* ホバー時は少し濃いグレー */
+  color: var(--slate-700); /* ホバー時は濃いグレー */
 }
 
 .mobile-menu-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
+  outline: none; /* デフォルトのフォーカス枠を削除 */
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5); /* カスタムフォーカス枠（青色） */
 }
 
-/* モバイルオーバーレイ */
+/* モバイルオーバーレイ（メニュー外クリックで閉じるための透明な背景） */
 .mobile-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 998;
-  animation: fadeIn 0.2s ease;
+  position: fixed; /* 画面に固定表示 */
+  top: 0; /* 上部から0px */
+  left: 0; /* 左端から0px */
+  right: 0; /* 右端まで */
+  bottom: 0; /* 下部まで（画面全体を覆う） */
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒背景 */
+  z-index: 998; /* サイドバーより下、他の要素より上 */
+  animation: fadeIn 0.2s ease; /* フェードインアニメーション（0.2秒） */
 }
 
+/* フェードインアニメーションの定義 */
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0; /* 開始時は透明 */
   }
   to {
-    opacity: 1;
+    opacity: 1; /* 終了時は不透明 */
   }
 }
 
 .sidebar {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 320px;
-  background-color: var(--slate-100);
-  border-right: 1px solid var(--slate-200);
-  padding: 2.5rem 1.5rem;
-  overflow-y: auto;
-  z-index: 999;
-  transition: transform 0.3s ease;
+  position: fixed; /* 画面に固定表示 */
+  display: flex; /* フレックスボックスレイアウト */
+  flex-direction: column; /* 縦方向に配置 */
+  top: 0; /* 上部から0px */
+  left: 0; /* 左端から0px */
+  bottom: 0; /* 下部まで */
+  width: 320px; /* 幅320px */
+  background-color: var(--slate-100); /* 薄いグレーの背景 */
+  border-right: 1px solid var(--slate-200); /* 右側にグレーの境界線 */
+  padding: 2.5rem 1.5rem; /* 内側の余白（上下2.5rem、左右1.5rem） */
+  overflow-y: auto; /* 縦方向のスクロール（内容が多い場合） */
+  z-index: 999; /* 他の要素より前面に表示 */
+  transition: transform 0.3s ease; /* スライドアニメーション（0.3秒） */
 }
 
-/* モバイル時のサイドバー */
+/* モバイル時のサイドバー（非表示状態） */
 .sidebar--mobile {
-  transform: translateX(-100%);
+  transform: translateX(-100%); /* 左側に100%移動（画面外に隠す） */
   /* モバイル時はハンバーガーボタンの高さ分パディングを追加 */
-  padding-top: 5rem;
+  padding-top: 5rem; /* 上部パディングを5remに増加（ハンバーガーボタンとの重複防止） */
 }
 
+/* モバイル時のサイドバー（表示状態） */
 .sidebar--mobile.sidebar--open {
-  transform: translateX(0);
+  transform: translateX(0); /* 元の位置に戻す（画面内に表示） */
 }
 
 /* デスクトップ時はハンバーガーボタンを非表示 */
 @media (min-width: 769px) {
   .mobile-menu-button {
-    display: none !important;
+    display: none !important; /* 強制的に非表示（!importantで優先度を上げる） */
   }
 
   .sidebar--mobile {
-    transform: none;
+    transform: none; /* 変形を無効化（通常の表示） */
     /* デスクトップ時は通常のパディングに戻す */
-    padding-top: 2.5rem;
+    padding-top: 2.5rem; /* 上部パディングを通常の2.5remに戻す */
   }
 }
 
 /* モバイル時はハンバーガーボタンを表示 */
 @media (max-width: 768px) {
   .mobile-menu-button {
-    display: flex;
+    display: flex; /* フレックスボックスとして表示（アイコンを中央配置するため） */
   }
 }
 

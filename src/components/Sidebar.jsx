@@ -81,9 +81,10 @@ export const Sidebar = () => {
     checkMobile()
 
     // リサイズイベントリスナーを追加
+    // ユーザーがウィンドウサイズを変更するたびにcheckMobile関数が呼ばれる
     window.addEventListener('resize', checkMobile)
 
-    // クリーンアップ: イベントリスナーを削除
+    // クリーンアップ: このコンポーネントが消えると、イベントリスナーを削除。メモリリークやバグの原因になる。
     return () => {
       window.removeEventListener('resize', checkMobile)
     }
@@ -116,6 +117,7 @@ export const Sidebar = () => {
   const sidebarContent = (
     <>
       {/* アプリケーションタイトル */}
+      {/* モバイル時：タイトルクリックでメニューが閉じる */}
       <Link to='/' onClick={closeMobileMenu}>
         <h1 className='sidebar__title'>Todos</h1>
       </Link>
@@ -129,13 +131,14 @@ export const Sidebar = () => {
               <h2 className='sidebar__lists_title'>Lists</h2>
               <ul className='sidebar__lists_items'>
                 {/* 既存のリスト一覧 */}
+                {/* モバイル時：リスト項目クリックでメニューが閉じる */}
                 {lists.map(listItem => (
                   <li key={listItem.id}>
                     <Link
                       data-active={shouldHighlight && listItem.id === activeId}
                       to={`/lists/${listItem.id}`}
                       className='sidebar__lists_item'
-                      onClick={closeMobileMenu}
+                      onClick={closeMobileMenu} // モバイルメニュー閉じる機能
                     >
                       <ListIcon aria-hidden className='sidebar__lists_icon' />
                       {listItem.title}
@@ -144,11 +147,12 @@ export const Sidebar = () => {
                 ))}
 
                 {/* 新規リスト作成リンク */}
+                {/* モバイル時：新規作成リンククリックでメニューが閉じる */}
                 <li>
                   <Link
                     to='/list/new'
                     className='sidebar__lists_button'
-                    onClick={closeMobileMenu}
+                    onClick={closeMobileMenu} // モバイルメニュー閉じる機能
                   >
                     <PlusIcon className='sidebar__lists_plus_icon' />
                     New List...
@@ -164,12 +168,13 @@ export const Sidebar = () => {
           {/* ユーザーアカウント情報 */}
           <div className='sidebar__account'>
             <p className='sidebar__account_name'>{userName}</p>
+            {/* モバイル時：ログアウトボタンクリックでメニューが閉じる */}
             <button
               type='button'
               className='sidebar__account_logout'
               onClick={() => {
                 logout()
-                closeMobileMenu()
+                closeMobileMenu() // モバイルメニュー閉じる機能
               }}
             >
               Logout
@@ -179,10 +184,11 @@ export const Sidebar = () => {
       ) : (
         <>
           {/* 未ログイン時のログインリンク */}
+          {/* モバイル時：ログインリンククリックでメニューが閉じる */}
           <Link
             to='/signin'
             className='sidebar__login'
-            onClick={closeMobileMenu}
+            onClick={closeMobileMenu} // モバイルメニュー閉じる機能
           >
             Login
           </Link>
@@ -212,7 +218,13 @@ export const Sidebar = () => {
 
       {/* サイドバー本体 */}
       <div
-        className={`sidebar ${isMobile ? 'sidebar--mobile' : ''} ${isMobileMenuOpen ? 'sidebar--open' : ''}`}
+        className={[
+          'sidebar', // 基本クラス（常に適用）
+          isMobile && 'sidebar--mobile', // モバイル時のみ適用
+          isMobileMenuOpen && 'sidebar--open', // メニューが開いている時のみ適用
+        ]
+          .filter(Boolean) // falseの値を除外（条件がfalseの場合は配列から削除）
+          .join(' ')} // 配列を空白区切りの文字列に結合
       >
         {sidebarContent}
       </div>
