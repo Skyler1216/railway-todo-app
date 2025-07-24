@@ -86,6 +86,7 @@ const EditList = () => {
       title='Edit List'
       className='edit-list-modal'
     >
+      {/* 以下childrenの中身 */}
       <div className='edit_list'>
         <p className='edit_list__error'>{errorMessage}</p>
         <form className='edit_list__form' onSubmit={onSubmit}>
