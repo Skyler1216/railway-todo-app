@@ -67,6 +67,8 @@
 /* モバイル時のサイドバー */
 .sidebar--mobile {
   transform: translateX(-100%);
+  /* モバイル時はハンバーガーボタンの高さ分パディングを追加 */
+  padding-top: 5rem;
 }
 
 .sidebar--mobile.sidebar--open {
@@ -81,6 +83,8 @@
 
   .sidebar--mobile {
     transform: none;
+    /* デスクトップ時は通常のパディングに戻す */
+    padding-top: 2.5rem;
   }
 }
 
